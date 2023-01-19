@@ -4,8 +4,6 @@ MINOR_VERSION=$2
 ARTIFACT_BUNDLE_NAME="swift-format.artifactbundle"
 MACOS_FOLDER_PATH="swift-format-$VERSION_OR_BRANCH-macos"
 
-TARGET_FILE_OR_DIR=(".git", ".github", "${ARTIFACT_BUNDLE_NAME}.zip")
-
 git checkout -b "release/$VERSION_OR_BRANCH-$MINOR_VERSION"
 git clone git@github.com:apple/swift-format.git
 
@@ -26,15 +24,6 @@ rm -rf $ARTIFACT_BUNDLE_NAME
 mv swift-format.artifactbundle.zip ../
 
 cd ..
-
-for file in $(ls)
-do
-    if [[ "${TARGET_FILE_OR_DIR[*]}" =~ "${file}" ]]; then
-        echo "Include ${file}"
-    else
-        rm -rf ${file}
-    fi
-done
 
 git add "${ARTIFACT_BUNDLE_NAME}.zip"
 git commit -m "Release $VERSION_OR_BRANCH version"
