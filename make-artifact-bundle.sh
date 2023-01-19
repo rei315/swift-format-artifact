@@ -21,10 +21,11 @@ sed 's/__VERSION__/'"${VERSION_OR_BRANCH}"'/g' ../spm-macos-artifact-bundle-info
 zip -yr - $ARTIFACT_BUNDLE_NAME > "${ARTIFACT_BUNDLE_NAME}.zip"
 
 rm -rf $ARTIFACT_BUNDLE_NAME
+mv swift-format.artifactbundle.zip ../
 
 cd ..
 
-git add "swift-format/${ARTIFACT_BUNDLE_NAME}.zip"
+git add "${ARTIFACT_BUNDLE_NAME}.zip"
 git commit -m "Release $VERSION_OR_BRANCH version"
 git tag "$VERSION_OR_BRANCH-$MINOR_VERSION"
-git push
+git push origin "$VERSION_OR_BRANCH-$MINOR_VERSION"
