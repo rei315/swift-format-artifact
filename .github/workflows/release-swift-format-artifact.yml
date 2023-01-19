@@ -5,6 +5,13 @@ name: CI
 # Controls when the workflow will run
 on:
   workflow_dispatch:
+    inputs:
+      versionOrBranch:
+        required: true
+        default: ""
+      minorVersion:
+        required: true
+        default: ""
 
 jobs:
   build:
@@ -16,5 +23,8 @@ jobs:
           fetch-depth: 0
 
       - name: Run a multi-line script
+        env:
+          BRANCH: ${{ github.event.inputs.BRANCH }}
+          MINOR_VERSION: ${{ github.event.inputs.minorVersion }}
         run: |
-          ./make-artifact-bundle.sh
+          ./make-artifact-bundle.sh ${BRANCH} ${MINOR_VERSION}
