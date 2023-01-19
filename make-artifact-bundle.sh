@@ -29,3 +29,8 @@ git add "${ARTIFACT_BUNDLE_NAME}.zip"
 git commit -m "Release $VERSION_OR_BRANCH version"
 git tag "$VERSION_OR_BRANCH-$MINOR_VERSION"
 git push origin "$VERSION_OR_BRANCH-$MINOR_VERSION"
+
+rm -rf swift-format/
+git checkout .
+git checkout main
+git branch -D "release/$VERSION_OR_BRANCH-$MINOR_VERSION"
